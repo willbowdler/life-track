@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      WidgetItem.belongsTo(models.Widget, { foreignKey: 'widget_id' })
+      WidgetItem.belongsTo(models.WidgetType, {
+        foreignKey: 'widget_item_type_id',
+      })
     }
   }
   WidgetItem.init(

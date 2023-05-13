@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Settings.init(
     {
-      userId: DataTypes.INTEGER,
+      user_id: DataTypes.INTEGER,
       colorTheme: DataTypes.STRING,
     },
     {

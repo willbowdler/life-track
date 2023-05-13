@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Widget.belongsTo(models.User, { foreignKey: 'user_id' })
+      Widget.belongsTo(models.WidgetType, { foreignKey: 'widget_type_id' })
+      Widget.hasMany(models.WidgetItem)
     }
   }
   Widget.init(

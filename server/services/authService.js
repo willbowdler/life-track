@@ -20,7 +20,14 @@ const registerUser = async (name, email, password) => {
 
   // TODO create settings for them
 
-  return await User.create(userData)
+  return await User.create(userData, {
+    include: [
+      {
+        association: Product.User,
+        include: [User.Addresses],
+      },
+    ],
+  })
 }
 
 module.exports = {
