@@ -13,7 +13,10 @@ const errorMiddleware = require('./middleware/errorHandler')
 const widgetRouter = require('./routes/widgetRouter.js')
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 app.use('/api/widgets', widgetRouter)
+
 app.use(errorMiddleware)
 app.use(session(sessionConfig))
 

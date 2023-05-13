@@ -5,3 +5,14 @@ TODO Learn typescript
 TODO Define models
 TODO Learn how to build RESTful api - read api tutorial fcc
 TODO convert to ts once i am comfortable with it
+
+CLIENT
+
+SERVER
+
+- TODO: Error Handling
+- TODO: Setting up validation middleware
+
+REFACTOR
+
+- Cleanse the routes from unnessary routes later
