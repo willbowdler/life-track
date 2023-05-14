@@ -8,14 +8,16 @@ const app = express()
 
 // Middlewares
 const errorMiddleware = require('./middleware/errorHandler')
-const isAuthenticated = require('./middleware/auth')
+const { isAuthenticated } = require('./middleware/auth')
 
 // Routes
-const widgetRouter = require('./routes/widgetRouter.js')
+const authRouter = require('./routes/authRouter')
+const widgetRouter = require('./routes/widgetRouter')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.use('/api/auth', authRouter)
 app.use('/api/widgets', isAuthenticated, widgetRouter)
 
 app.use(session(sessionConfig))
