@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/widgets', isAuthenticated, widgetRouter)
 
-app.use(errorMiddleware)
 app.use(session(sessionConfig))
+app.use(errorMiddleware)
 
 const PORT = config.port || 3000
 app.listen(PORT, () => {

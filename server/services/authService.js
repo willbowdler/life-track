@@ -1,9 +1,15 @@
+const User = require('../models/user')
+const Widget = require('../models/widget')
+const WidgetItem = require('../models/widgetitem')
+const Settings = require('../models/settings')
+
+const bcrypt = require('bcrypt')
+
 const findUserByEmail = async () => {}
 
-const registerUser = async (name, email, password) => {
-  let user = await User.findOne({ where: { email } })
-
-  if (user) throw new Error('User with this email already exists.', 409)
+const register = async (name, email, password) => {
+  const existingUser = await User.findOne({ where: { email } })
+  if (existingUser) throw new Error('User with this email already exists.', 409)
 
   const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -18,19 +24,42 @@ const registerUser = async (name, email, password) => {
     settings: settingsData,
   }
 
-  // TODO create settings for them
+  const newUser = await User.create(userData)
+  newUser = await User.createSettings(settingsData)
+  return newUser
+}
 
-  return await User.create(userData, {
+const login = async (email, password, session) => {
+  const user = await User.findOne({
+    where: { email },
     include: [
       {
-        association: Product.User,
-        include: [User.Addresses],
+        model: Widget,
+        include: [{ model: WidgetItem, include: [{ model: WidgetType }] }],
       },
+      { model: Settings },
     ],
+  })
+
+  if (!user) throw new Error('Invalid email or password', 401)
+
+  const isPasswordValid = await bcrypt.compare(password, user.password)
+  if (!isPasswordValid) throw new Error('Invalid email or password', 401)
+
+  session.userId = user.id
+  return user
+}
+
+const logout = async (session) => {
+  session.destroy((err) => {
+    if (err) throw new Error('Internal Server Error', 500)
+    return 'Login Successful'
   })
 }
 
 module.exports = {
   findUserByEmail,
-  registerUser,
+  register,
+  login,
+  logout,
 }
