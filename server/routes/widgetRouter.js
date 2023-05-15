@@ -3,7 +3,7 @@ const widgetController = require('../controllers/widgetController.js')
 
 const widgetRouter = express.Router()
 
-widgetRouter.get('/index', widgetController.findWidgetsByUserId)
+widgetRouter.get('/:userId/index', widgetController.findWidgetsByUserId)
 
 widgetRouter.get('/:widgetId/show', widgetController.findWidgetById)
 

@@ -1,8 +1,10 @@
-const initialStateList = {
+const initialWidgetState = {
   isLoading: true,
   lists: [],
   error: null,
 }
+
+// TODO i want to remove is loading and handle that in the component
 
 const listReducer = (state, action) => {
   switch (action.type) {

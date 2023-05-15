@@ -24,6 +24,6 @@ app.use(session(sessionConfig))
 app.use(errorMiddleware)
 
 const PORT = config.port || 3000
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server started on port ${PORT}`)
 })

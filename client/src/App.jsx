@@ -1,11 +1,9 @@
-import ErrorPage from './routes/ErrorPage'
-import Dashboard from './routes/Dashboard'
-import Root from './routes/Root'
-
-import dashboardLoader from './routes/loaders/dashboardLoader.js'
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { useListsContext } from './context/ListsContext'
+
+import routes from './routes/routes'
+
+import ErrorPage from './routes/ErrorPage'
+import Root from './routes/Root'
 
 function App() {
   const router = createBrowserRouter([
@@ -13,12 +11,7 @@ function App() {
       path: '/',
       element: <Root />,
       errorElement: <ErrorPage />,
-      children: [
-        {
-          path: 'dashboard',
-          element: <Dashboard />,
-        },
-      ],
+      children: routes,
     },
   ])
   return (

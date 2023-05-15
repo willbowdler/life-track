@@ -1,10 +1,10 @@
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const sequelize = require('../config/db')
-const Session = require('./models/Session')
+const Session = require('../models/session')
 
 const sessionConfig = {
-  secret: 'your-secret-key',
+  secret: process.env.SESSION_SECRET,
   store: new SequelizeStore({
     db: sequelize,
     table: 'Session',
