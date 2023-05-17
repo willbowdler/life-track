@@ -2,16 +2,16 @@ import { useEffect } from 'react'
 
 import { Icon } from '@iconify/react'
 
-import { useListsContext } from '../context/ListsContext'
+// import { useListsContext } from '../context/ListsContext'
 
-import Spinner from '../components/global/Spinner'
+// import Spinner from '../components/global/Spinner'
 
 function Dashboard() {
-  const { listState, fetchLists } = useListsContext()
+  // const { listState, fetchLists } = useListsContext()
 
-  useEffect(() => {
-    fetchLists()
-  }, [])
+  // useEffect(() => {
+  //   fetchLists()
+  // }, [])
   return (
     <div className='container'>
       <div className='row'>
@@ -24,13 +24,13 @@ function Dashboard() {
               </button>
             </div>
 
-            {listState.isLoading ? (
+            {/* {listState.isLoading ? (
               <Spinner />
             ) : (
               listState.list.map((list, i) => {
                 return <h1 key={i}>Yo</h1>
               })
-            )}
+            )} */}
           </div>
         </div>
       </div>

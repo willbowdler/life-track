@@ -4,10 +4,10 @@ import { Icon } from '@iconify/react'
 
 function Root() {
   return (
-    <>
-      <nav className='navbar navbar-expand bg-light border-bottom border-2'>
+    <div className='min-vh-100'>
+      <nav className='navbar navbar-expand bg-light border-bottom border-2 px-2'>
         <div className='container-fluid'>
-          <div className='navbar-brand'>DashBoard</div>
+          <div className='navbar-brand'>Life Track</div>
 
           <ul className='navbar-nav'>
             <li className='nav-item'>
@@ -26,13 +26,12 @@ function Root() {
           </ul>
         </div>
       </nav>
-
       <Outlet />
 
       <div className='fixed-bottom d-flex justify-content-end m-3 cursor-pointer'>
         <Icon icon='material-symbols:settings-outline-rounded' width={20} />
       </div>
-    </>
+    </div>
   )
 }
 

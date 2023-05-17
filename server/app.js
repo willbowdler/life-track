@@ -20,10 +20,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/auth', authRouter)
 app.use('/api/widgets', isAuthenticated, widgetRouter)
 
+app.use((req, res, next) => {
+  console.log('ping!')
+  next()
+})
+
 app.use(session(sessionConfig))
 app.use(errorMiddleware)
 
-const PORT = config.port || 3000
+const PORT = config.port || 3001
 app.listen(PORT, async () => {
   console.log(`Server started on port ${PORT}`)
 })

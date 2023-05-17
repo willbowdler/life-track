@@ -1,42 +1,51 @@
 import authService from '../services/authService'
 import { useAuth } from '../context/AuthContext'
 
-const useRegister = async (userData) => {
+const useRegister = async () => {
   const { dispatch } = useAuth()
-  try {
-    dispatch({ type: 'LOGIN_REQUEST' })
-    const data = await authService.register(userData)
-    dispatch({
-      type: 'LOGIN_SUCCESS',
-      payload: { user: data, userRole: data.role },
-    })
-    return data
-  } catch (error) {
-    dispatch({ type: 'LOGIN_FAILURE', payload: { error: error } })
+  const register = async (userData) => {
+    try {
+      dispatch({ type: 'LOGIN_REQUEST' })
+      const data = await authService.register(userData)
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: { user: data, userRole: data.role },
+      })
+      return data
+    } catch (error) {
+      dispatch({ type: 'LOGIN_FAILURE', payload: { error: error } })
+    }
   }
+  return { register }
 }
 
-const useLogin = async (loginData) => {
+const useLogin = () => {
   const { dispatch } = useAuth()
-  try {
-    dispatch({ type: 'LOGIN_REQUEST' })
-    const data = authService.login(loginData)
-    dispatch({
-      type: 'LOGIN_SUCCESS',
-      payload: { user: data, userRole: data.role },
-    })
-    return data
-  } catch (error) {
-    dispatch({ type: 'LOGIN_FAILURE', payload: { error: error } })
+
+  const login = async (loginData) => {
+    try {
+      dispatch({ type: 'LOGIN_REQUEST' })
+      const data = await authService.login(loginData)
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        payload: { user: data, userRole: data.role },
+      })
+      return data
+    } catch (error) {
+      dispatch({ type: 'LOGIN_FAILURE', payload: { error: error } })
+    }
   }
+  return { login }
 }
 
-const useLogout = async (userId) => {
+const useLogout = async () => {
   const { dispatch } = useAuth()
-
-  dispatch({ type: 'LOGOUT' })
-  const data = authService.logout(userId)
-  return data
+  const logout = (userId) => {
+    dispatch({ type: 'LOGOUT' })
+    const data = authService.logout(userId)
+    return data
+  }
+  return { logout }
 }
 
 export { useRegister, useLogin, useLogout }

@@ -8,12 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Settings.belongsTo(models.User, { foreignKey: 'user_id' })
+      Settings.belongsTo(models.User, {
+        foreignKey: 'UserId',
+      })
     }
   }
   Settings.init(
     {
-      user_id: DataTypes.INTEGER,
+      UserId: DataTypes.INTEGER,
       colorTheme: DataTypes.STRING,
     },
     {

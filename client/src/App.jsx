@@ -1,8 +1,10 @@
+import { AuthProvider } from './context/AuthContext'
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import routes from './routes/routes'
 
-import ErrorPage from './routes/ErrorPage'
+import ErrorPage from './routes/elements/error/ErrorPage'
 import Root from './routes/Root'
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
   ])
   return (
     <div>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   )
 }

@@ -1,4 +1,6 @@
-const Widget = require('../models/widget')
+const db = require('../models')
+
+const Widget = db.Widget
 
 const createWidget = async (newWidget, userId) => {
   return Widget.create({ ...newWidget, userId })

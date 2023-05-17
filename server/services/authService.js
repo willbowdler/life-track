@@ -1,7 +1,11 @@
-const User = require('../models/user')
-const Widget = require('../models/widget')
-const WidgetItem = require('../models/widgetitem')
-const Settings = require('../models/settings')
+const db = require('../models')
+
+const User = db.User
+const Widget = db.Widget
+const WidgetItem = db.WidgetItem
+const ItemType = db.ItemType
+const WidgetType = db.WidgetType
+const Settings = db.Settings
 
 const bcrypt = require('bcrypt')
 
@@ -30,12 +34,16 @@ const register = async (name, email, password) => {
 }
 
 const login = async (email, password, session) => {
+  console.log(User)
   const user = await User.findOne({
     where: { email },
     include: [
       {
         model: Widget,
-        include: [{ model: WidgetItem, include: [{ model: WidgetType }] }],
+        include: [
+          { model: WidgetType },
+          { model: WidgetItem, include: [{ model: ItemType }] },
+        ],
       },
       { model: Settings },
     ],

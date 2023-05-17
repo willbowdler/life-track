@@ -1,51 +1,48 @@
-import Authorized from './Authorized'
+import Login from './elements/auth/Login'
+import Register from './elements/auth/Register'
 
-import Dashboard from './elements/Dashboard'
-import AddWidget from './elements/AddWidget'
-import GlobalSettings from './elements/GlobalSettings'
-import ToDoToday from './elements/ToDoToday'
-import AdminBoard from './elements/AdminBoard'
+import Dashboard from './elements/main/Dashboard'
+import AddWidget from './elements/main/AddWidget'
+import GlobalSettings from './elements/main/GlobalSettings'
+import ToDoToday from './elements/main/ToDoToday'
+
+import AdminBoard from './elements/admin/AdminBoard'
 
 const routes = [
   {
+    path: '/login',
+    element: <Login />,
+    // loader: '',
+  },
+  {
+    path: '/register',
+    element: <Register />,
+    // loader: '',
+  },
+  {
     path: '/dashboard',
-    element: (
-      <Authorized>
-        <Dashboard />
-      </Authorized>
-    ),
+    element: <Dashboard />,
+    // loader: '',
   },
   {
     path: '/todo',
-    element: (
-      <Authorized>
-        <ToDoToday />
-      </Authorized>
-    ),
+    element: <ToDoToday />,
+    // loader: '',
   },
   {
     path: '/add_widget',
-    element: (
-      <Authorized>
-        <AddWidget />
-      </Authorized>
-    ),
+    element: <AddWidget />,
+    // loader: '',
   },
   {
     path: '/settings',
-    element: (
-      <Authorized>
-        <GlobalSettings />
-      </Authorized>
-    ),
+    element: <GlobalSettings />,
+    // loader: '',
   },
   {
     path: '/admin/board',
-    element: (
-      <Authorized admin={true}>
-        <AdminBoard />
-      </Authorized>
-    ),
+    element: <AdminBoard />,
+    // loader: '',
   },
 ]
 
