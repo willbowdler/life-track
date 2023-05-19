@@ -16,16 +16,17 @@ const widgetRouter = require('./routes/widgetRouter')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-app.use('/api/auth', authRouter)
-app.use('/api/widgets', isAuthenticated, widgetRouter)
+app.use(session(sessionConfig))
 
 app.use((req, res, next) => {
+  console.log(req.session)
   console.log('ping!')
   next()
 })
 
-app.use(session(sessionConfig))
+app.use('/api/auth', authRouter)
+app.use('/api/widgets', isAuthenticated, widgetRouter)
+
 app.use(errorMiddleware)
 
 const PORT = config.port || 3001

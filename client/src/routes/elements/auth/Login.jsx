@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import AuthInput from '../../../components/pageComponents/auth/AuthInput'
 import AuthButton from '../../../components/pageComponents/auth/AuthButton'
+import FormError from '../../../components/pageComponents/auth/FormError'
 
 import { useLogin } from '../../../hooks/auth'
-import FormError from '../../../components/pageComponents/auth/FormError'
+
+import validateAuthForm from '../../../utils/auth/validateAuthForm'
 
 function Login() {
   const [loginData, setLoginData] = useState({
@@ -14,28 +17,12 @@ function Login() {
   })
   const [errors, setErrors] = useState({})
   const { login } = useLogin()
-  console.log(login)
 
   const checkFormValid = () => {
-    const errors = {}
-    const { email, password, confirmPassword } = loginData
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-    if (!email) {
-      errors.email = 'Email is required!'
-    } else if (!emailRegex.test(email)) {
-      errors.email = 'Invalid email format.'
-    }
-
-    if (!password) {
-      errors.password = 'Password is required!'
-    } else if (password.length < 8) {
-      errors.password = 'Password must be at least 8 characters long.'
-    } else if (password !== confirmPassword) {
-      errors.password = 'Passwords do not match.'
-    }
-
+    const errors = validateAuthForm(loginData)
     setErrors(errors)
+    console.log(errors)
+
     return Object.keys(errors).length === 0
   }
 
@@ -43,9 +30,11 @@ function Login() {
     <div className='container pt-3'>
       <form
         className='px-4'
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault()
-          if (checkFormValid()) login(loginData)
+          if (checkFormValid()) {
+            await login(loginData)
+          }
         }}
         noValidate
       >
@@ -96,7 +85,7 @@ function Login() {
 
         <div className='text-center'>
           <p>
-            Don't have an account? <a href='#!'>Sign up</a>
+            Don't have an account? <Link to='/register'>Sign up</Link>
           </p>
         </div>
       </form>

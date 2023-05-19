@@ -11,7 +11,13 @@ const bcrypt = require('bcrypt')
 
 const findUserByEmail = async () => {}
 
-const register = async (name, email, password) => {
+const findUserById = async (id) => {
+  const existingUser = await User.findOne({ where: { id } })
+  if (!existingUser) throw new Error('No user found.')
+  return existingUser
+}
+
+const register = async (firstName, lastName, email, password) => {
   const existingUser = await User.findOne({ where: { email } })
   if (existingUser) throw new Error('User with this email already exists.', 409)
 
@@ -22,19 +28,22 @@ const register = async (name, email, password) => {
   }
 
   const userData = {
-    name: name,
+    firstName: firstName,
+    lastName: lastName,
     email: email,
     password: hashedPassword,
     settings: settingsData,
   }
 
-  const newUser = await User.create(userData)
-  newUser = await User.createSettings(settingsData)
+  const newUser = await User.create(userData, {
+    include: [Settings],
+  })
+  session.userId = newUser.id
   return newUser
 }
 
 const login = async (email, password, session) => {
-  console.log(User)
+  console.log(email, password)
   const user = await User.findOne({
     where: { email },
     include: [
@@ -67,6 +76,7 @@ const logout = async (session) => {
 
 module.exports = {
   findUserByEmail,
+  findUserById,
   register,
   login,
   logout,

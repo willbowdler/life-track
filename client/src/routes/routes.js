@@ -1,3 +1,5 @@
+import Protected from './authorizaton/Protected'
+
 import Login from './elements/auth/Login'
 import Register from './elements/auth/Register'
 
@@ -11,37 +13,64 @@ import AdminBoard from './elements/admin/AdminBoard'
 const routes = [
   {
     path: '/login',
-    element: <Login />,
+    element: (
+      <Protected permission={'guest'}>
+        <Login />
+      </Protected>
+    ),
     // loader: '',
   },
   {
     path: '/register',
-    element: <Register />,
+    element: (
+      <Protected permission={'guest'}>
+        <Register />
+      </Protected>
+    ),
     // loader: '',
   },
   {
     path: '/dashboard',
-    element: <Dashboard />,
+    element: (
+      <Protected>
+        <Dashboard />
+      </Protected>
+    ),
     // loader: '',
   },
   {
     path: '/todo',
-    element: <ToDoToday />,
+    element: (
+      <Protected>
+        <ToDoToday />
+      </Protected>
+    ),
     // loader: '',
   },
   {
     path: '/add_widget',
-    element: <AddWidget />,
+    element: (
+      <Protected>
+        <AddWidget />
+      </Protected>
+    ),
     // loader: '',
   },
   {
     path: '/settings',
-    element: <GlobalSettings />,
-    // loader: '',
+    element: (
+      <Protected>
+        <GlobalSettings />
+      </Protected>
+    ),
   },
   {
     path: '/admin/board',
-    element: <AdminBoard />,
+    element: (
+      <Protected>
+        <AdminBoard />
+      </Protected>
+    ),
     // loader: '',
   },
 ]

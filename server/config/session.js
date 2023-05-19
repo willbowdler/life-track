@@ -1,8 +1,7 @@
+require('dotenv').config()
 const session = require('express-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('../models')
-
-console.log(db.User)
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,

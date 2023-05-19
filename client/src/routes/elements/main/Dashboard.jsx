@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import SettingsLink from '../../../components/global/SettingsLink'
+
 import { Icon } from '@iconify/react'
 
 // import { useListsContext } from '../context/ListsContext'
@@ -34,6 +36,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+      <SettingsLink />
     </div>
   )
 }

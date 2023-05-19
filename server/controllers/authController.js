@@ -1,9 +1,15 @@
 const authService = require('../services/authService')
+const userService = require('../services/userService')
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body
+  const { firstName, lastName, email, password } = req.body
 
-  const newUser = await authService.register(name, email, password)
+  const newUser = await authService.register(
+    firstName,
+    lastName,
+    email,
+    password
+  )
   res.status(200).json({
     success: true,
     data: { user: newUser },
@@ -31,8 +37,20 @@ const logout = async (req, res) => {
   })
 }
 
+const persistLogin = async (req, res) => {
+  if (req.session.userId) {
+    const user = userService.findUserById(req.session.userId)
+    res.status(200).json({
+      success: true,
+      data: { user: user },
+      message: 'Successfully persisted.',
+    })
+  } else throw new Error('Unauthorized. User not logged in.', 401)
+}
+
 module.exports = {
   register,
   login,
   logout,
+  persistLogin,
 }

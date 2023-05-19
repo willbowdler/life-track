@@ -10,4 +10,6 @@ authRouter.post('/login', authController.login)
 
 authRouter.post('/logout', isAuthenticated, authController.logout)
 
+authRouter.get('/persist', isAuthenticated, authController.persistLogin)
+
 module.exports = authRouter

@@ -27,10 +27,6 @@ function Root() {
         </div>
       </nav>
       <Outlet />
-
-      <div className='fixed-bottom d-flex justify-content-end m-3 cursor-pointer'>
-        <Icon icon='material-symbols:settings-outline-rounded' width={20} />
-      </div>
     </div>
   )
 }
