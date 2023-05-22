@@ -52,7 +52,6 @@ const useLogout = () => {
 const usePersist = () => {
   const { authDispatch, authState } = useAuth()
 
-  console.log('yoyoyoyoy')
   const persist = async () => {
     try {
       if (authState.isLoggedIn) return

@@ -21,8 +21,9 @@ function Modal({ children, title, body }) {
             ></button>
           </div>
           <div className='modal-body'>{body}</div>
-          {children}
-          {/* <div className='modal-footer'>
+          <div className='d-flex flex-end justify-content-end gap-2 m-2'>
+            {children}
+            {/* <div className='modal-footer'>
             <button
               type='button'
               className='btn btn-secondary'
@@ -34,6 +35,7 @@ function Modal({ children, title, body }) {
               Save changes
             </button>
           </div> */}
+          </div>
         </div>
       </div>
     </div>

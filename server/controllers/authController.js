@@ -8,7 +8,8 @@ const register = async (req, res) => {
     firstName,
     lastName,
     email,
-    password
+    password,
+    req.session
   )
   res.status(200).json({
     success: true,

@@ -9,15 +9,7 @@ const Settings = db.Settings
 
 const bcrypt = require('bcrypt')
 
-const findUserByEmail = async () => {}
-
-const findUserById = async (id) => {
-  const existingUser = await User.findOne({ where: { id } })
-  if (!existingUser) throw new Error('No user found.')
-  return existingUser
-}
-
-const register = async (firstName, lastName, email, password) => {
+const register = async (firstName, lastName, email, password, session) => {
   const existingUser = await User.findOne({ where: { email } })
   if (existingUser) throw new Error('User with this email already exists.', 409)
 
@@ -75,8 +67,6 @@ const logout = async (session) => {
 }
 
 module.exports = {
-  findUserByEmail,
-  findUserById,
   register,
   login,
   logout,

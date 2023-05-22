@@ -10,6 +10,8 @@ function GlobalSettings() {
   const [settings, setSettings] = useState({})
   const { authState } = useAuth()
 
+  const { logout } = useLogout()
+
   useEffect(() => {
     if (authState.isLoggedIn) setSettings(authState.user.settings)
   }, [authState])
@@ -43,7 +45,14 @@ function GlobalSettings() {
           <Modal
             title={'Logout'}
             body={'Are you sure you would like to log out?'}
-          ></Modal>
+          >
+            <button className='btn btn-primary' data-bs-dismiss='modal'>
+              Cancel
+            </button>
+            <button onClick={() => logout()} className='btn btn-secondary'>
+              Logout
+            </button>
+          </Modal>
         </div>
       </div>
     </>

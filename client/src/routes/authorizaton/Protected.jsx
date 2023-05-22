@@ -20,7 +20,7 @@ function Protected({ children, permission = 'user' }) {
       if (authState.isLoggedIn) {
         return <div>{children}</div>
       } else {
-        return <div>{children}</div>
+        return <Navigate to='/login' replace />
       }
 
     case 'guest':
