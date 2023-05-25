@@ -13,6 +13,7 @@ const { isAuthenticated } = require('./middleware/auth')
 // Routes
 const authRouter = require('./routes/authRouter')
 const widgetRouter = require('./routes/widgetRouter')
+const widgetTypeRouter = require('./routes/widgetTypeRouter')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter)
 app.use('/api/widgets', isAuthenticated, widgetRouter)
+app.use('/api/widget-types', isAuthenticated, widgetTypeRouter)
 
 app.use(errorMiddleware)
 

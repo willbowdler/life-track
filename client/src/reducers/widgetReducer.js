@@ -1,17 +1,15 @@
 const initialWidgetState = {
-  isLoading: true,
-  lists: [],
+  isLoading: false,
+  widgets: [],
   error: null,
 }
 
-// TODO i want to remove is loading and handle that in the component
-
-const listReducer = (state, action) => {
+const widgetReducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, isLoading: true, error: null }
     case 'FETCH_SUCCESS':
-      return { ...state, isLoading: false, lists: action.payload }
+      return { ...state, isLoading: false, widgets: action.payload }
     case 'FETCH_FAILURE':
       return { ...state, isLoading: false, error: action.payload }
     default:
@@ -19,4 +17,4 @@ const listReducer = (state, action) => {
   }
 }
 
-export { listReducer, initialStateList }
+export { widgetReducer, initialWidgetState }

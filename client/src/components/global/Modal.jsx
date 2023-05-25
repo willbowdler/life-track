@@ -1,8 +1,8 @@
-function Modal({ children, title, body }) {
+function Modal({ children, title, body, id = 'modal' }) {
   return (
     <div
       className='modal fade'
-      id='modal'
+      id={id}
       tabIndex='-1'
       aria-labelledby='modal'
       aria-hidden='true'
@@ -21,20 +21,8 @@ function Modal({ children, title, body }) {
             ></button>
           </div>
           <div className='modal-body'>{body}</div>
-          <div className='d-flex flex-end justify-content-end gap-2 m-2'>
+          <div className='d-flex flex-end justify-content-end gap-3 mx-3 mb-3'>
             {children}
-            {/* <div className='modal-footer'>
-            <button
-              type='button'
-              className='btn btn-secondary'
-              data-bs-dismiss='modal'
-            >
-              Close
-            </button>
-            <button type='button' className='btn btn-primary'>
-              Save changes
-            </button>
-          </div> */}
           </div>
         </div>
       </div>

@@ -30,7 +30,6 @@ const authService = {
   },
 
   async persist() {
-    console.log('heyo')
     const response = await fetch('./api/auth/persist')
     const data = await response.json()
     return data

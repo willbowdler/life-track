@@ -16,12 +16,7 @@ function Root() {
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link cursor-pointer'>
-                <Icon
-                  icon='material-symbols:add-circle-outline-rounded'
-                  width={20}
-                />
-              </a>
+              <a className='nav-link cursor-pointer'></a>
             </li>
           </ul>
         </div>

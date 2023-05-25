@@ -4,7 +4,6 @@ import Login from './elements/auth/Login'
 import Register from './elements/auth/Register'
 
 import Dashboard from './elements/main/Dashboard'
-import AddWidget from './elements/main/AddWidget'
 import GlobalSettings from './elements/main/GlobalSettings'
 import ToDoToday from './elements/main/ToDoToday'
 
@@ -43,15 +42,6 @@ const routes = [
     element: (
       <Protected>
         <ToDoToday />
-      </Protected>
-    ),
-    // loader: '',
-  },
-  {
-    path: '/add_widget',
-    element: (
-      <Protected>
-        <AddWidget />
       </Protected>
     ),
     // loader: '',

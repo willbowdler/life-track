@@ -1,4 +1,5 @@
 import { AuthProvider } from './context/AuthContext'
+import { WidgetProvider } from './context/WidgetContext'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -19,7 +20,9 @@ function App() {
   return (
     <div>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <WidgetProvider>
+          <RouterProvider router={router} />
+        </WidgetProvider>
       </AuthProvider>
     </div>
   )

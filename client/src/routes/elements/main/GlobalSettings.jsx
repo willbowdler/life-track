@@ -33,13 +33,7 @@ function GlobalSettings() {
             data-bs-toggle='modal'
             data-bs-target='#modal'
           >
-            <button
-              className='btn btn-unstyled fs-5'
-              data-bs-toggle='modal'
-              data-bs-target='#modal'
-            >
-              Logout
-            </button>
+            <button className='btn btn-unstyled fs-5'>Logout</button>
           </div>
 
           <Modal
@@ -49,7 +43,11 @@ function GlobalSettings() {
             <button className='btn btn-primary' data-bs-dismiss='modal'>
               Cancel
             </button>
-            <button onClick={() => logout()} className='btn btn-secondary'>
+            <button
+              onClick={() => logout()}
+              className='btn btn-secondary'
+              data-bs-dismiss='modal'
+            >
               Logout
             </button>
           </Modal>

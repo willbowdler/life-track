@@ -12,7 +12,7 @@ const findWidgetById = async (req, res) => {
   const widget = await widgetService.findWidgetById(req.params.widgetId)
   res.status(200).json({
     success: true,
-    data: { widget: widget },
+    data: { widget },
     message: 'Widget Retrieved.',
   })
 }
@@ -21,7 +21,7 @@ const findWidgetsByUserId = async (req, res) => {
   const widgets = await widgetService.findWidgetsByUserId(req.params.userId)
   res.status(200).json({
     success: true,
-    data: { widgets: widgets },
+    data: { widgets },
     message: 'Widgets Retrieved.',
   })
 }
