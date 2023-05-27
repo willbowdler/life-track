@@ -9,11 +9,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      content: {
         type: Sequelize.STRING,
-      },
-      ItemTypeId: {
-        type: Sequelize.INTEGER,
       },
       WidgetId: {
         type: Sequelize.INTEGER,

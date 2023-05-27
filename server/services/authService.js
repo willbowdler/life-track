@@ -35,7 +35,6 @@ const register = async (firstName, lastName, email, password, session) => {
 }
 
 const login = async (email, password, session) => {
-  console.log(email, password)
   const user = await User.findOne({
     where: { email },
     include: [

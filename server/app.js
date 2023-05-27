@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(session(sessionConfig))
 
 app.use((req, res, next) => {
-  console.log(req.session)
   console.log('ping!')
   next()
 })

@@ -1,9 +1,24 @@
 const db = require('../models')
 
 const Widget = db.Widget
+const WidgetType = db.WidgetType
+const WidgetItem = db.WidgetItem
 
 const createWidget = async (newWidget, userId) => {
-  return Widget.create({ ...newWidget, userId })
+  const type = newWidget.type.toLowerCase()
+  const widgetType = await WidgetType.findOne({ where: { type } })
+
+  return Widget.create(
+    {
+      title: newWidget.title,
+      WidgetTypeId: widgetType.id,
+      UserId: userId,
+      WidgetItems: newWidget.widgetItems,
+    },
+    {
+      include: [WidgetItem],
+    }
+  )
 }
 
 const findWidgetById = async (widgetId) => {

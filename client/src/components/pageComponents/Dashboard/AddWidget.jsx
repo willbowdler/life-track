@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import { Icon } from '@iconify/react'
 
@@ -7,9 +7,40 @@ import ChecklistOptions from './widgetOptions/ChecklistOptions'
 import ListOptions from './widgetOptions/ListOptions'
 import ReminderOptions from './widgetOptions/ReminderOptions'
 
+import { useAuth } from '../../../context/AuthContext'
+
 function AddWidget() {
+  const formRef = useRef()
+
+  const [widgetTitle, setWidgetTitle] = useState()
   const [widgetTypes, setWidgetTypes] = useState()
+  const [widgetItems, setWidgetItems] = useState([])
   const [selectedType, setSelectedType] = useState()
+  const { authState } = useAuth()
+
+  const widgetOptions = {
+    Checklist: (
+      <ChecklistOptions
+        widgetItems={widgetItems}
+        setWidgetItems={setWidgetItems}
+        title={widgetTitle}
+      />
+    ),
+    List: (
+      <ListOptions
+        widgetItems={widgetItems}
+        setWidgetItems={setWidgetItems}
+        title={widgetTitle}
+      />
+    ),
+    Reminder: (
+      <ReminderOptions
+        widgetItems={widgetItems}
+        setWidgetItems={setWidgetItems}
+        title={widgetTitle}
+      />
+    ),
+  }
 
   const handleTypeChange = (e) => {
     setSelectedType(e.target.value)
@@ -18,7 +49,7 @@ function AddWidget() {
   const fetchWidgetTypes = async () => {
     const response = await fetch('/api/widget-types/index')
     const data = await response.json()
-    setWidgetTypes(data)
+    setWidgetTypes(data?.data?.widgetTypes)
   }
   useEffect(() => {
     fetchWidgetTypes()
@@ -36,11 +67,12 @@ function AddWidget() {
             className='form-control'
             id='widgetType'
           >
+            <option>--Select a widget type--</option>
             {widgetTypes
-              ? widgetTypes.data.widgetTypes.map((type, i) => {
+              ? widgetTypes.map((type, i) => {
                   return (
-                    <option key={i} value={type.name}>
-                      {type.name}
+                    <option key={i} value={type.type}>
+                      {type.type}
                     </option>
                   )
                 })
@@ -55,6 +87,7 @@ function AddWidget() {
             className='form-control'
             id='widgetTitle'
             placeholder='Enter widget title'
+            onChange={(e) => setWidgetTitle(e.target.value)}
           />
         </div>
         {selectedType ? widgetOptions[selectedType] : null}
@@ -62,14 +95,33 @@ function AddWidget() {
     </div>
   )
 
-  const widgetOptions = {
-    Checklist: <ChecklistOptions />,
-    List: <ListOptions />,
-    Reminder: <ReminderOptions />,
-  }
-
   return (
-    <form>
+    <form
+      ref={formRef}
+      onSubmit={(e) => {
+        e.preventDefault()
+        const widgetItemsCleaned = widgetItems.map((widgetItem) => {
+          return {
+            content: widgetItem.content,
+          }
+        })
+
+        fetch(`/api/widgets/${authState.user.data.user.id}/create`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: widgetTitle,
+            type: selectedType,
+            widgetItems: widgetItemsCleaned,
+          }),
+        })
+
+        setWidgetItems([])
+        setWidgetTitle(null)
+
+        formRef.current.reset()
+      }}
+    >
       <button
         type='button'
         className='btn btn-nostyle'
@@ -90,11 +142,15 @@ function AddWidget() {
         <button
           type='button'
           className='btn btn-secondary'
-          data-dismiss='modal'
+          data-bs-dismiss='modal'
         >
           Close
         </button>
-        <button type='button' className='btn btn-primary'>
+        <button
+          type='submit'
+          className='btn btn-primary'
+          data-bs-dismiss='modal'
+        >
           Save
         </button>
       </Modal>

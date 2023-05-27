@@ -9,13 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       WidgetItem.belongsTo(models.Widget, { foreignKey: 'WidgetId' })
-      WidgetItem.belongsTo(models.ItemType, { foreignKey: 'WidgetId' })
     }
   }
   WidgetItem.init(
     {
-      name: DataTypes.STRING,
-      WidgetId: DataTypes.INTEGER,
+      content: DataTypes.STRING,
       WidgetId: DataTypes.INTEGER,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,

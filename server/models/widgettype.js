@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   WidgetType.init(
     {
-      name: DataTypes.STRING,
+      type: DataTypes.STRING,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
     },

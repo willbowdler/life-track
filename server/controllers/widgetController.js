@@ -1,7 +1,7 @@
 const widgetService = require('../services/widgetService')
 
 const createWidget = async (req, res) => {
-  await widgetService.createWidget(req.body, req.body.userId)
+  await widgetService.createWidget(req.body, req.params.userId)
   res.status(200).json({
     success: true,
     message: 'Widget Created.',

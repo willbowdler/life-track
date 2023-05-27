@@ -40,7 +40,7 @@ const logout = async (req, res) => {
 
 const persistLogin = async (req, res) => {
   if (req.session.userId) {
-    const user = userService.findUserById(req.session.userId)
+    const user = await userService.findUserById(req.session.userId)
     res.status(200).json({
       success: true,
       data: { user: user },
